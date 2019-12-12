@@ -13,7 +13,6 @@ class Home extends Component {
             data: []
         }
     }
-
     getData() {
         axios({
             method: 'get',

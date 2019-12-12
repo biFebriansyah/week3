@@ -1,8 +1,6 @@
 
 import React from 'react';
-import { AppRegistry } from 'react-native'
 import { Router, Scene } from 'react-native-router-flux';
-
 import Login from './src/screen/Login/Login';
 import Home from './src/screen/Home/Home';
 import Registers from './src/screen/Register/Register';
@@ -22,7 +20,6 @@ const App = () => {
           key='Home'
           component={Home}
           back={false}
-          initial
         />
         <Scene hideNavBar
           key='Register'
@@ -31,7 +28,7 @@ const App = () => {
         <Scene hideNavBar
           key='Test'
           component={Test}
-
+          initial
         />
         <Scene hideNavBar
           key='Profile'
