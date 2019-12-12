@@ -1,5 +1,5 @@
 import { Item, Input, View, Button, Text, Label, Image } from 'native-base';
-import { StyleSheet } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import React, { Component } from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -89,7 +89,9 @@ class Engineer extends Component {
                                 style={{ width: 300, height: 300 }}
                             />
                         )}
-                        <MaterialIcons name="camera-front" size={40} color="#DFD8C8" onPress={this.onChoosePhoto}></MaterialIcons>
+                        <TouchableOpacity onPress={this.onChoosePhoto}>
+                            <MaterialIcons name="camera-front" size={40} color="#DFD8C8"></MaterialIcons>
+                        </TouchableOpacity>
                         <Text style={{ color: '#bbb' }}>Choose Photo</Text>
                     </View>
                     <View style={{ height: 100 }}>

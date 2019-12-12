@@ -5,8 +5,6 @@ import axios from 'axios';
 import { FlatGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
 
-
-
 class Home extends Component {
     constructor(props) {
         super(props)
