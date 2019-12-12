@@ -1,44 +1,47 @@
 
-import { Item, Input, View, Button, Text } from 'native-base';
+import { Item, Input, View, Button, Text, Label } from 'native-base';
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { InteractionManager } from "react-native";
 
 
 class Login extends Component {
-
 
     onSubmit() {
         Actions.Home();
     }
 
-
+    goRegis() {
+        Actions.Register()
+    }
     render() {
         return (
             <>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, backgroundColor: '#fff' }}>
                     <View style={{ flex: 1, justifyContent: "center", marginHorizontal: 30 }}>
                         <Text style={{ fontSize: 40 }}>Welcome</Text>
-                        <Text style={{ fontSize: 30 }}>HiringMobile</Text>
+                        <Text style={{ fontSize: 20 }}>Hiring Mobile</Text>
                     </View>
-                    <View style={{ flex: 1, marginHorizontal: 30 }}>
-                        <View style={{ marginVertical: 20 }}>
-                            <Item rounded style={{ paddingHorizontal: 20 }}>
-                                <Input placeholder='Username' />
+                    <View style={{ flex: 1, marginHorizontal: 40 }}>
+                        <View style={{ marginTop: 20, marginBottom: 10 }}>
+                            <Item floatingLabel >
+                                <Label>Username</Label>
+                                <Input />
                             </Item>
                         </View>
-                        <View style={{ marginVertical: 20 }}>
-                            <Item rounded style={{ paddingHorizontal: 20 }}>
-                                <Input placeholder='Password' />
+                        <View style={{ marginTop: 10, marginBottom: 40 }}>
+                            <Item floatingLabel >
+                                <Label>Password</Label>
+                                <Input secureTextEntry={true} />
                             </Item>
                         </View>
                         <View>
-                            <Button rounded primary style={{ justifyContent: "center" }} onPress={this.onSubmit} >
+                            <Button rounded primary style={{ justifyContent: "center", }} onPress={this.onSubmit} >
                                 <Text>Sign In</Text>
                             </Button>
-                            <Button style={{ justifyContent: "center", backgroundColor: '', elevation: 0 }} >
-                                <Text style={{ color: '#0A60FF', textTransform: "lowercase", color: 'blue' }}>Register here</Text>
-                            </Button>
+                            <View style={{ flexDirection: "row", justifyContent: 'center', marginTop: 20 }}>
+                                <Text style={{ marginRight: 5 }}>Don't Have Account?</Text>
+                                <Text style={{ color: '#0A60FF', textTransform: "lowercase", color: 'blue' }} onPress={this.goRegis}>Register here</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
