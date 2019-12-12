@@ -4,6 +4,9 @@ import { ScrollView, StyleSheet, SafeAreaView, Image, TouchableOpacity } from 'r
 import axios from 'axios';
 import { FlatGrid } from 'react-native-super-grid';
 import { Actions } from 'react-native-router-flux';
+
+
+
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -48,9 +51,6 @@ class Home extends Component {
                             itemDimension={90}
                             items={this.state.data}
                             style={styles.gridView}
-                            // staticDimension={300}
-                            // fixed
-                            // spacing={20}
                             renderItem={({ item, index }) => (
                                 <TouchableOpacity style={styles.itemContainer} onPress={() => { Actions.Profile({ username: item.username }) }}>
                                     <Image source={{ uri: item.photo }} style={{ flex: 1, borderRadius: 5 }} />
@@ -97,5 +97,9 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
 });
+
+
+
+
 
 export default Home

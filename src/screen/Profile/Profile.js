@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView } from "react-native";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, TouchableOpacity } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import axios from 'axios'
+import { Actions } from 'react-native-router-flux';
+import axios from 'axios';
 
 class Profile extends Component {
     constructor(props) {
@@ -12,6 +12,10 @@ class Profile extends Component {
             data: []
         }
         this.getData = this.getData.bind(this)
+    }
+
+    goBack() {
+        Actions.pop()
     }
 
     getData() {
@@ -45,8 +49,7 @@ class Profile extends Component {
             <SafeAreaView style={styles.container}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.titleBar}>
-                        <Ionicons name="ios-arrow-back" size={24} color="#52575D"></Ionicons>
-                        <Ionicons name="md-more" size={24} color="#52575D"></Ionicons>
+                        <TouchableOpacity onPress={this.goBack}><Ionicons name="ios-arrow-back" size={24} color="#52575D"></Ionicons></TouchableOpacity>
                     </View>
 
                     <View style={{ alignSelf: "center" }}>
