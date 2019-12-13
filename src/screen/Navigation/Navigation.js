@@ -38,6 +38,13 @@ export default class Navigation extends React.Component {
             pressColor: 'rgba(255, 255, 255, 0.16)'
         },
         {
+            key: 'notif',
+            icon: 'ios-notifications',
+            label: 'Notif',
+            barColor: '#CCC',
+            pressColor: 'rgba(255, 255, 255, 0.16)'
+        },
+        {
             key: 'profile',
             icon: 'md-person',
             label: 'Profile',

@@ -2,12 +2,75 @@
 import { Item, Input, View, Button, Text, Label } from 'native-base';
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { getCompany, getEngineer, getEngineer2 } from '../../public/Redux/Actions/User';
+import { bindActionCreators } from 'redux';
+import axios from 'axios';
+import DataForm from 'form-data';
 
 
 class Login extends Component {
 
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            role: '',
+            username: '',
+            password: ''
+        }
+        this.onSubmit = this.onSubmit.bind(this);
+        this.login = this.login.bind(this);
+        this.dataUser = new DataForm()
+        this.setData = this.setData.bind(this);
+    }
+
+    async setDatauser(username) {
+
+        if (this.state.role === 2) {
+            await this.props.setDataEngineer(username);
+        }
+        if (this.state.role === 1) {
+            await this.props.setDataCompany(username);
+        }
+    }
+
+    setData() {
+        this.dataUser.append('username', this.state.username);
+        this.dataUser.append('password', this.state.password);
+    }
+
+    login() {
+        
+        this.setData()
+        axios({
+            method: 'post',
+            url: 'http://192.168.1.17:4000/login',
+            headers: { 'Content-Type': 'application/json' },
+            data: this.dataUser
+
+        }).then(res => {
+            const result = res.data.result[0]
+            this.setState({ role: result.role })
+            this.setDatauser(this.state.username);
+            Actions.navigation()
+        }).catch(err => {
+            if (err.response) {
+                const result = err.response.data.result
+                console.log(result);
+            }
+            if (err.request) {
+                return console.log(err.request)
+            }
+            else {
+                return console.log('unknown err ' + err)
+            }
+        })
+    }
+
     onSubmit() {
-        Actions.Home();
+        this.login()
+        console.log(this.props);
     }
 
     goRegis() {
@@ -25,13 +88,19 @@ class Login extends Component {
                         <View style={{ marginTop: 20, marginBottom: 10 }}>
                             <Item floatingLabel >
                                 <Label>Username</Label>
-                                <Input />
+                                <Input
+                                    name='username'
+                                    value={this.state.username}
+                                    onChangeText={(username) => this.setState({ username })}
+                                />
                             </Item>
                         </View>
                         <View style={{ marginTop: 10, marginBottom: 40 }}>
                             <Item floatingLabel >
                                 <Label>Password</Label>
-                                <Input secureTextEntry={true} />
+                                <Input secureTextEntry={true}
+                                    onChangeText={(password) => this.setState({ password })}
+                                />
                             </Item>
                         </View>
                         <View>
@@ -50,4 +119,12 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapDispatchToPropps = (dispatch) => {
+
+    return {
+        setDataEngineer: bindActionCreators(getEngineer2, dispatch),
+        setDataCompany: bindActionCreators(getCompany, dispatch)
+    };
+}
+
+export default connect(null, mapDispatchToPropps)(Login);
