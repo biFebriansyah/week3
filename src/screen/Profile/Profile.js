@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, TouchableOpaci
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
+import { Button } from 'native-base'
 
 class Profile extends Component {
     constructor(props) {
@@ -37,6 +38,10 @@ class Profile extends Component {
                 console.log(err)
             }
         })
+    }
+
+    goHire() {
+        Actions.HireModal()
     }
 
     componentDidMount() {
@@ -77,6 +82,11 @@ class Profile extends Component {
                             <Text style={[styles.text, styles.subText]}>Project</Text>
                         </View>
                     </View>
+                    <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 300, flex: 1 }}>
+                        <Button rounded style={{ justifyContent: 'center', backgroundColor: '#bbb', width: 150 }} onPress={this.goHire} >
+                            <Text style={styles.text}>Hire Me</Text>
+                        </Button>
+                    </View>
                 </ScrollView>
             </SafeAreaView>
         )
@@ -93,9 +103,10 @@ const styles = StyleSheet.create({
         color: "#52575D"
     },
     image: {
-        width: 200,
+        width: null,
         height: 200,
-        borderRadius: 100
+        borderRadius: 100,
+        resizeMode: 'contain'
     },
     titleBar: {
         flexDirection: "row",
